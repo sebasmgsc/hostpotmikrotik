@@ -1,0 +1,91 @@
+<html>
+<head>
+    <title>Profile Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('calavera.png') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 100vh;
+        }
+        .profile-card {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+        .status {
+            color: #00d084;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .status i {
+            margin-right: 5px;
+        }
+        .info {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .info div {
+            margin: 5px 0;
+        }
+        .info .label {
+            color: #ff9800;
+        }
+        .info .value {
+            color: white;
+        }
+        .logout-button {
+            background: white;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .logout-button:hover {
+            background: #ff9800;
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script language="JavaScript">
+        function openLogout() {
+            if (window.name != 'hotspot_status') return true;
+            open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+            window.close();
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <div class="profile-card">
+        <div class="status">
+            <i class="fas fa-circle"></i> EN LINEA
+        </div>
+        <div class="info">
+            <div><span class="label">USUARIO</span>: <span class="value">$(username)</span></div>
+            <div><span class="label">CONECTADO</span>: <span class="value">$(uptime)</span></div>
+            <div><span class="label">RECIBIDO</span>: <span class="value">$(bytes-in-nice)</span></div>
+            <div><span class="label">ENVIADO</span>: <span class="value">$(bytes-out-nice)</span></div>
+        </div>
+        <button class="logout-button" onclick="window.location.href='login.html'">SALIR</button>
+    </div>
+</body>
+</html>

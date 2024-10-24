@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Login Page</title>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('calavera.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        .login-container {
+            text-align: center;
+            color: white;
+            position: absolute;
+            bottom: 50px;
+            width: 100%;
+        }
+        .login-container input {
+            width: 300px;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 16px;
+            transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+        }
+        .login-container input::placeholder {
+            color: white;
+        }
+        .login-container input:hover {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
+        }
+        .login-container input:focus {
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+            transform: scale(1.1);
+        }
+        .login-container .icon {
+            position: absolute;
+            margin-left: -30px;
+            margin-top: 18px;
+            color: white;
+        }
+        .login-container .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .login-container .buttons button {
+            width: 150px;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #ff6b6b, #f06595);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+        }
+        .login-container .buttons button:hover {
+            background: linear-gradient(45deg, #f06595, #ff6b6b);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+            transform: scale(1.1);
+        }
+        .login-container .buttons button i {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body class='login'>
+    <!-- MikroTik Logic -->
+    $(if chap-id)
+        <form name="sendin" action="$(link-login-only)" method="post">
+            <input type="hidden" name="username" />
+            <input type="hidden" name="password" />
+            <input type="hidden" name="dst" value="$(link-orig)" />
+            <input type="hidden" name="popup" value="true" />
+        </form>
+        
+        <script type="text/javascript" src="md5.js"></script>
+        <script type="text/javascript">
+            function doLogin() {
+                document.sendin.username.value = document.login.username.value;
+                document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+                document.sendin.submit();
+                return false;
+            }
+        </script>
+    $(endif)
+
+    <!-- Frontend Design -->
+    <div class="login-container">
+        <form class="vertical-form" name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+            <input type="hidden" name="dst" value="$(link-orig)" />
+            <input type="hidden" name="popup" value="true" />
+
+            <div>
+                <input name="username" autocomplete="on" type="text" value="$(username)" placeholder="Usuario" />
+                <span class="icon">💀</span>
+            </div>
+            <div>
+                <input name="password" autocomplete="off" type="password" placeholder="Contraseña" />
+                <i class="fas fa-lock icon"></i>
+            </div>
+
+            <div class="buttons">
+                <button type="submit" onclick="window.location.href='status.html'">ENTRAR <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        document.login.username.focus();
+    </script>
+    <script type="text/javascript">
+        document.oncontextmenu = function() { return false; }
+    </script>
+</body>
+</html>
